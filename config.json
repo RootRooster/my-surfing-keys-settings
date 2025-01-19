@@ -1,0 +1,26 @@
+settings.theme = `
+  font-family: 'JetBrains Mono', monospace;
+`;
+
+
+// adding kagi as a search option
+api.addSearchAlias('k', 'kagi', 'https://kagi.com/search?q=', 's', null, function(response) {
+    var res = JSON.parse(response.text);
+    return res.map(function(r){
+        return r.phrase;
+    });
+});
+
+// adding spotify as a search option
+api.addSearchAlias('s', 'spotify', 'https://open.spotify.com/search/', 's', null, function(response) {
+    var res = JSON.parse(response.text);
+    return res.map(function(r){
+        return r.phrase;
+    });
+});
+
+
+
+api.removeSearchAlias('b');
+settings.defaultSearchEngine = 'k';
+settings.language = "EN";
